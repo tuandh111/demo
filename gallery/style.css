@@ -4,7 +4,13 @@
 }
 
 body {
+    background-image: url(./images/344066446_6254803524562852_4827925714680273735_n.jpg);
     background-size: 100%;
+    background-size: cover;
+    /* Đảm bảo hình ảnh nền chiếm toàn bộ kích thước */
+    background-position: center;
+    /* Căn giữa hình ảnh nền */
+    background-repeat: no-repeat;
     -webkit-perspective: 800;
 }
 
