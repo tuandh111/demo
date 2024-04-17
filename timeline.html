@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/png" href="./img/CILKGax.png">
+    <!-- Tiêu đề của trang dòng thời gian -->
+    <title>Thời gian đã trải qua</title>
+    <link type="text/css" rel="stylesheet" href="./css/default.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/jscex.min.js"></script>
+    <script type="text/javascript" src="./js/jscex-parser.js"></script>
+    <script type="text/javascript" src="./js/jscex-jit.js"></script>
+    <script type="text/javascript" src="./js/jscex-builderbase.min.js"></script>
+    <script type="text/javascript" src="./js/jscex-async.min.js"></script>
+    <script type="text/javascript" src="./js/jscex-async-powerpack.min.js"></script>
+    <script type="text/javascript" src="./js/functions.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/love.js" charset="utf-8"></script>
+    <style type="text/css"></style>
+
+</head>
+
+<body>
+    <div class="buttons">
+        <a href="index.html" class="btn btn-bir">Sinh nhật</a>
+        <a href="timeline.html" class="btn btn-timeline">Dòng thời gian</a>
+        <a href="gallery/index.html" class="btn btn-gallery">Ảnh kĩ niệm</a>
+    </div>
+    <div id="main">
+
+        <div id="wrap">
+            <h1 style="text-align: center;">Nhấn vào ảnh trái tim điều bất ngờ sẽ đến với em</h1>
+            <div id="text">
+                <div id="code">
+                    <!-- 4. CHỈNH SỬA LỜI CHÚC CỦA BẠN TẠI ĐÂY-->
+                    <span class="say" style="color: #3500ff;">
+                        Chúc mừng sinh nhật Thanh Ngân<br>
+                        Chúc em có nhiều niềm vui và hạnh phúc<br>
+                        Mọi chuyện buồn điều biến mất niềm vui lại đến với em<br>
+                        Anh vẫn sẽ mãi ở bên cạnh em như những gì anh đã từng nói với em<br>
+                        Anh luôn muốn thấy Thanh Ngân của anh mỗi ngày điều cười thật tươi<br>
+                        Và thành công trên con đường sự nghiệp của mình<br>
+                        Hãy nhớ rằng anh sẽ là người bảo vệ em, yêu thương em<br>
+                        Không để Thanh Ngân anh phải buồn đâu á<br>
+                        <br>
+                        Bớt thức khuya lại và không còn suy nghĩ những chuyện lung tung nữa <br>
+                        Và giành thời gian cho anh Tuấn nhiều hơn <br>
+                        Chúc em tuổi 25 luôn xinh đẹp trong mắt ba mẹ và mọi người<br>
+                        Chúc em sinh nhật vui vẻ.<br>
+                        <br>
+                        <span class="space"> -- Anh yêu Em --</span>
+                        <span class="space"> -- Hoàng Tuấn --</span>
+                    </span>
+                    </p>
+                </div>
+            </div>
+            <div id="clock-box">
+                <span class="STYLE1" style="margin-left: 50px;">Chúc mừng sinh nhật Thanh Ngân</span>
+                <div id="age" style="margin-left: 50px;"></div>
+                <div id="clock">
+                </div>
+            </div>
+            <canvas id="canvas" width="1100" height="680"></canvas>
+        </div>
+
+    </div>
+
+    <!-- Phần nhạc -->
+    <audio id="player" autoplay loop>
+        <source src="./music/music.mp3" type="audio/mp3" />
+    </audio>
+    <script>
+        // Ngày sinh (21-4-2000) và ngày sinh nhật tiếp theo (21-4-năm hiện tại)
+        var birthday = new Date('2000-04-21');
+        var nextBirthday = getNextBirthday();
+        var today = new Date();
+
+        // Tính số tuổi
+        var age = today.getFullYear() - birthday.getFullYear();
+
+        // Kiểm tra xem đã qua sinh nhật chưa trong năm nay
+        if (today.getMonth() < birthday.getMonth() ||
+            (today.getMonth() === birthday.getMonth() && today.getDate() < birthday.getDate())) {
+            age--; // Chưa qua sinh nhật trong năm nay, giảm số tuổi đi 1
+        }
+        document.getElementById('age').textContent = 'Số tuổi của bạn là ' + age + ' tuổi.';
+        // Hàm tính ngày sinh nhật tiếp theo
+        function getNextBirthday() {
+            var today = new Date();
+            var currentYear = today.getFullYear();
+            var birthdayThisYear = new Date(currentYear, birthday.getMonth(), birthday.getDate());
+
+            // Nếu đã qua ngày sinh nhật trong năm nay, tính đến ngày sinh nhật trong năm sau
+            if (today > birthdayThisYear) {
+                currentYear++;
+            }
+
+            return new Date(currentYear, birthday.getMonth(), birthday.getDate());
+        }
+
+        // Hàm cập nhật đồng hồ đếm ngược
+        function updateCountdown() {
+            var today = new Date();
+            var timeUntilNextBirthday = nextBirthday - today;
+
+            // Nếu đã đến ngày sinh nhật tiếp theo, cập nhật ngày sinh nhật tiếp theo và hiển thị lại đồng hồ đếm ngược
+            if (timeUntilNextBirthday <= 0) {
+                nextBirthday = getNextBirthday();
+                timeUntilNextBirthday = nextBirthday - today;
+            }
+
+            // Chuyển đổi khoảng thời gian còn lại sang đơn vị ngày, giờ, phút, giây
+            var days = Math.floor(timeUntilNextBirthday / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeUntilNextBirthday % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeUntilNextBirthday % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeUntilNextBirthday % (1000 * 60)) / 1000);
+
+            // Cập nhật nội dung của phần tử có id là 'countdown' để hiển thị đồng hồ đếm ngược
+            var countdownElement = document.getElementById('clock');
+            countdownElement.textContent = 'Đếm ngược đến ngày sinh nhật tiếp theo: ' + days + ' ngày ' + hours + ' giờ ' + minutes + ' phút ' + seconds + ' giây';
+
+            // Cập nhật lại đồng hồ đếm ngược sau mỗi giây bằng cách sử dụng setTimeout
+            setTimeout(updateCountdown, 1000);
+        }
+
+        // Gọi hàm updateCountdown để bắt đầu đếm ngược
+        updateCountdown();
+
+        (function () {
+            var canvas = $('#canvas');
+            var start_date = new Date();
+            var year = 2005, month = 8, day = 1;
+            var start_date = new Date(year, month, day);
+            if (!canvas[0].getContext) {
+                $("#error").show();
+                return false;
+            }
+
+            var width = canvas.width();
+            var height = canvas.height();
+            canvas.attr("width", width);
+            canvas.attr("height", height);
+            var opts = {
+                seed: {
+                    x: width / 2 - 20,
+                    color: "rgb(190, 26, 37)",
+                    scale: 2
+                },
+                branch: [
+                    [535, 680, 570, 250, 500, 200, 30, 100, [
+                        [540, 500, 455, 417, 340, 400, 13, 100, [
+                            [450, 435, 434, 430, 394, 395, 2, 40]
+                        ]],
+                        [550, 445, 600, 356, 680, 345, 12, 100, [
+                            [578, 400, 648, 409, 661, 426, 3, 80]
+                        ]],
+                        [539, 281, 537, 248, 534, 217, 3, 40],
+                        [546, 397, 413, 247, 328, 244, 9, 80, [
+                            [427, 286, 383, 253, 371, 205, 2, 40],
+                            [498, 345, 435, 315, 395, 330, 4, 60]
+                        ]],
+                        [546, 357, 608, 252, 678, 221, 6, 100, [
+                            [590, 293, 646, 277, 648, 271, 2, 80]
+                        ]]
+                    ]]
+                ],
+                bloom: {
+                    num: 700,
+                    width: 1080,
+                    height: 650,
+                },
+                footer: {
+                    width: 1200,
+                    height: 5,
+                    speed: 10,
+                }
+            }
+
+            var tree = new Tree(canvas[0], width, height, opts);
+            var seed = tree.seed;
+            var foot = tree.footer;
+            var hold = 1;
+
+            canvas.click(function (e) {
+                var offset = canvas.offset(), x, y;
+                x = e.pageX - offset.left;
+                y = e.pageY - offset.top;
+                if (seed.hover(x, y)) {
+                    hold = 0;
+                    canvas.unbind("click");
+                    canvas.unbind("mousemove");
+                    canvas.removeClass('hand');
+                }
+            }).mousemove(function (e) {
+                var offset = canvas.offset(), x, y;
+                x = e.pageX - offset.left;
+                y = e.pageY - offset.top;
+                canvas.toggleClass('hand', seed.hover(x, y));
+            });
+
+            var seedAnimate = eval(Jscex.compile("async", function () {
+                seed.draw();
+                while (hold) {
+                    $await(Jscex.Async.sleep(10));
+                }
+                while (seed.canScale()) {
+                    seed.scale(0.95);
+                    $await(Jscex.Async.sleep(10));
+                }
+                while (seed.canMove()) {
+                    seed.move(0, 2);
+                    foot.draw();
+                    $await(Jscex.Async.sleep(10));
+                }
+            }));
+
+            var growAnimate = eval(Jscex.compile("async", function () {
+                do {
+                    tree.grow();
+                    $await(Jscex.Async.sleep(10));
+                } while (tree.canGrow());
+            }));
+
+            var flowAnimate = eval(Jscex.compile("async", function () {
+                do {
+                    tree.flower(2);
+                    $await(Jscex.Async.sleep(10));
+                } while (tree.canFlower());
+            }));
+
+            var moveAnimate = eval(Jscex.compile("async", function () {
+                tree.snapshot("p1", 240, 0, 610, 680);
+                while (tree.move("p1", 500, 0)) {
+                    foot.draw();
+                    $await(Jscex.Async.sleep(10));
+                }
+                foot.draw();
+                tree.snapshot("p2", 500, 0, 610, 680);
+
+                canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
+                canvas.css("background", "#ffe");
+                $await(Jscex.Async.sleep(300));
+                canvas.css("background", "none");
+
+            }));
+
+            var jumpAnimate = eval(Jscex.compile("async", function () {
+                var ctx = tree.ctx;
+                while (true) {
+                    tree.ctx.clearRect(0, 0, width, height);
+                    tree.jump();
+                    foot.draw();
+                    $await(Jscex.Async.sleep(25));
+                }
+            }));
+
+            var textAnimate = eval(Jscex.compile("async", function () {
+                var start_date_timestamp = Date.now(); // Lấy thời điểm hiện tại dưới dạng số miligiây
+                var start_date = new Date(start_date_timestamp); // Chuyển đổi thành đối tượng Date
+
+                var year = start_date.getFullYear(); // Lấy năm từ đối tượng Date
+
+                console.log(year);
+                var together = new Date();
+                var year = 2000, month = 04, day = 21;  // 5. thay đổi ngày tháng năm yêu nhau tại đây hoặc ngày sinh của người mà bạn muốn chúc 03/12/
+
+                var end_date = new Date(new Date(year, month, day));
+                var end_date = new Date(year, month, day); // Tạo một đối tượng Date mới
+                var year = end_date.getFullYear(); // Lấy năm từ đối tượng Date
+
+                console.log(year);
+                var total_months = (year - start_date.getFullYear()) * 12 + (end_date.getMonth() - start_date.getMonth())
+                console.log("total_months: ", total_months)
+                $("#code").show().typewriter();
+                $("#clock-box").fadeIn(500);
+                console.log(together)
+            }));
+
+            var runAsync = eval(Jscex.compile("async", function () {
+                $await(seedAnimate());
+                $await(growAnimate());
+                $await(flowAnimate());
+                $await(moveAnimate());
+
+                textAnimate().start();
+
+                $await(jumpAnimate());
+            }));
+
+            runAsync().start();
+        })();
+    </script>
+    </div>
+</body>
+
+</html>
