@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typewriter Effect</title>
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/jscex.min.js"></script>
+    <script type="text/javascript" src="./js/jscex-parser.js"></script>
+    <script type="text/javascript" src="./js/jscex-jit.js"></script>
+    <script type="text/javascript" src="./js/jscex-builderbase.min.js"></script>
+    <script type="text/javascript" src="./js/jscex-async.min.js"></script>
+    <script type="text/javascript" src="./js/jscex-async-powerpack.min.js"></script>
+    <script type="text/javascript" src="./js/functions.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/love.js" charset="utf-8"></script>
 </head>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-
-        height: 100vh;
-        background-color: #f8f9fa;
-    }
-
     .typewriter {
         text-align: center;
     }
@@ -40,25 +40,65 @@
             width: 100%;
         }
     }
+
+    .container {
+        position: relative;
+        width: 200px;
+        /* Chiều rộng của khung chứa hình ảnh */
+        height: 200px;
+        /* Chiều cao của khung chứa hình ảnh */
+    }
+
+    .rotating-image {
+        border-radius: 100%;
+        position: absolute;
+        top: 34px;
+        left: 0;
+        width: 100px;
+        /* Chiều rộng của hình ảnh */
+        height: 100px;
+        /* Chiều cao của hình ảnh */
+        transform: translate(-50%, -50%);
+        animation: rotateImage 4s linear infinite;
+        /* Tên animation, thời gian, chế độ, lặp vô hạn */
+    }
+
+    @keyframes rotateImage {
+        from {
+            transform: translate(-50%, -50%) rotate(0deg);
+            /* Góc quay ban đầu là 0 độ */
+        }
+
+        to {
+            transform: translate(-50%, -50%) rotate(360deg);
+            /* Góc quay cuối cùng là 360 độ (hoàn thành một vòng) */
+        }
+    }
 </style>
 
 <body class="page__main">
-
     <div class="typewriter">
-        <div class="buttons" style="height: 70px;">
+        <div class="buttons" style="height: 80px;">
             <!-- Chữ ở menu bạn có thể sửa lại theo ý của bạn -->
             <a href="index.html" class="btn btn-bir">Sinh nhật</a>
             <a href="timeline.html" class="btn btn-timeline">Dòng thời gian</a>
             <a href="gallery/index.html" class="btn btn-gallery">Ảnh kĩ niệm</a>
             <a href="gallery.html" class="btn btn-gallery">Please Tell Me Why
             </a>
+            <a href="Firework.html" class="btn btn-timeline">Pháo hoa</a>
+            <div class="container" style="float: right;">
+                <img src="./img/girl/307768045_826611751683574_5295234649546968385_n.jpg" alt="Rotating Image"
+                    class="rotating-image">
+            </div>
         </div>
         <p id="text"></p>
     </div>
     <audio id="player" autoplay loop>
         <source src="./music/PleaseTellMeWhy-BaoThy-4045805.mp3" type="audio/mp3" />
     </audio>
+
     <script>
+
         const texts = [
             "My baby love you so much forever you and I",
             "I love you oh! I love you so much forever you and I",
@@ -74,7 +114,7 @@
         function startTyping() {
             // Chờ 28 giây trước khi bắt đầu chạy hiệu ứng
             setTimeout(type, 28600); // 28 giây (28000 milliseconds)
-            setTimeout(stopMusic, 52000);
+            setTimeout(stopMusic, 52350);
         }
         function stopMusic() {
             const audio = document.getElementById('player');
