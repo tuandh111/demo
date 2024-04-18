@@ -18,6 +18,7 @@ a {
     background-size: cover;
     background-position-y: -18rem;
 }
+
 .buttons {
     display: flex;
     column-gap: 3rem;
@@ -31,12 +32,10 @@ a {
 }
 
 .btn-bir {
-    background-image: linear-gradient(
-        to right,
-        #314755 0%,
-        #26a0da 51%,
-        #314755 100%
-    );
+    background-image: linear-gradient(to right,
+            #314755 0%,
+            #26a0da 51%,
+            #314755 100%);
     margin: 10px;
     padding: 15px 45px;
     text-align: center;
@@ -50,13 +49,12 @@ a {
 }
 
 .btn-timeline {
-    background-image: linear-gradient(
-        to right,
-        #da22ff 0%,
-        #9733ee 51%,
-        #da22ff 100%
-    );
+    background-image: linear-gradient(to right,
+            #da22ff 0%,
+            #9733ee 51%,
+            #da22ff 100%);
 }
+
 .btn-timeline {
     margin: 10px;
     padding: 15px 45px;
@@ -71,19 +69,18 @@ a {
 }
 
 .btn-timeline:hover {
-    background-position: right center; 
+    background-position: right center;
     color: #fff;
     text-decoration: none;
 }
 
 .btn-gallery {
-    background-image: linear-gradient(
-        to right,
-        #02aab0 0%,
-        #00cdac 51%,
-        #02aab0 100%
-    );
+    background-image: linear-gradient(to right,
+            #02aab0 0%,
+            #00cdac 51%,
+            #02aab0 100%);
 }
+
 .btn-gallery {
     margin: 10px;
     padding: 15px 45px;
@@ -98,7 +95,8 @@ a {
 }
 
 .btn-gallery:hover {
-    background-position: right center; /* change the direction of the change here */
+    background-position: right center;
+    /* change the direction of the change here */
     color: #fff;
     text-decoration: none;
 }
@@ -106,12 +104,12 @@ a {
 .cover {
     width: 240px;
     height: 240px;
-   
+
     box-shadow: 0 0 30px #eee;
     position: absolute;
     margin-top: 3rem;
     left: calc(50% - 100px);
-  
+
     border-radius: 120px;
     border: 5px solid rgb(255, 17, 0);
 }
